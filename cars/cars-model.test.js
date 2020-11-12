@@ -33,5 +33,23 @@ describe('cars model', () => {
         })
     } )
 
-    // describe('')
+    describe('update()', () => {
+        it('can update', async () => {
+            await db('cars').insert({name: 'tesla'})
+            let car = await Cars.update(1, { name: 'ford'})
+            expect(car).toMatchObject({ id: 1, name: 'ford'})
+            car = await db('cars').where({id:1}).first()
+            expect(car.name).toBe('ford')
+        })
+    })
+
+    describe('remove', () => {
+        it('can remove car', async () => {
+            await db('cars').insert({ name: 'ford'})
+            await Cars.remove(1)
+            let car = await db('cars')
+            expect(car).toHaveLength(0)
+            expect(car).toEqual([])
+        })
+    })
 })

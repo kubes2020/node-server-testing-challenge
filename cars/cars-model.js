@@ -27,10 +27,12 @@ async function getAll() {
     return db('cars')
 }
 
-async function update() {
-    return null
+async function update(id, changes) {
+   await db('cars').update(changes).where({id})
+   return db('cars').where({id}).first()
 }
 
-async function remove() {
-    return null
+function remove(id) {
+    return db('cars').where({id}).delete()
+    
 }

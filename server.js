@@ -9,7 +9,7 @@ server.use(express.json())
 server.use(helmet())
 server.use(morgan('dev'))
 
-server.get('/', (req, res)=> {
+server.get('/cars', (req, res)=> {
     Cars.getAll()
     .then(cars => {
         res.status(200).json(cars)
@@ -19,9 +19,9 @@ server.get('/', (req, res)=> {
     })
 })
 
-// server.get('/', (req, res)=> {
-//     res.send("endpoint working")
-// })
+server.get('/', (req, res)=> {
+    res.send("endpoint working")
+})
 
 module.exports = server
 

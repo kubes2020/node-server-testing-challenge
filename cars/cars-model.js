@@ -10,8 +10,9 @@ module.exports = {
 
 }
 
-async function add() {
-    return null
+async function add(car) {
+    const [id] = await db('cars').insert(car)
+    return db('cars').where({id}).first()
 }
 
 async function findBy() {

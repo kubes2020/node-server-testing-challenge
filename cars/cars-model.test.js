@@ -1,6 +1,5 @@
 const Cars = require('./cars-model.js')
 const db = require('../data/config.js')
-const { default: expectCt } = require('helmet/dist/middlewares/expect-ct')
 
 beforeEach(async () => {
     await db('cars').truncate()
@@ -16,7 +15,7 @@ describe('cars model', () => {
             await db('cars').insert({ name: 'ford' })
             let cars = await Cars.getAll()
             expect(cars).toHaveLength(1)
-            await db('cars').insert({ name: 'ford', name: 'tesla' })
+            await db('cars').insert({ name: 'tesla' })
             cars = await Cars.getAll()
             expect(cars).toHaveLength(2)
         })
